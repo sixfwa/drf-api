@@ -23,15 +23,13 @@ class UserDataClass:
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email,
-            id=user.id
+            id=user.id,
         )
 
 
 def create_user(user_dc: "UserDataClass") -> "UserDataClass":
     instance = models.User(
-        first_name=user_dc.first_name,
-        last_name=user_dc.last_name,
-        email=user_dc.email
+        first_name=user_dc.first_name, last_name=user_dc.last_name, email=user_dc.email
     )
     if user_dc.password is not None:
         instance.set_password(user_dc.password)
@@ -51,7 +49,7 @@ def create_token(user_id: int) -> str:
     payload = dict(
         id=user_id,
         exp=datetime.datetime.utcnow() + datetime.timedelta(hours=24),
-        iat=datetime.datetime.utcnow()
+        iat=datetime.datetime.utcnow(),
     )
     token = jwt.encode(payload, settings.JWT_SECRET, algorithm="HS256")
 

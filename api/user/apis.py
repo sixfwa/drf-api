@@ -5,7 +5,6 @@ from . import services, authentication
 
 
 class RegisterApi(views.APIView):
-
     def post(self, request):
         serializer = user_serializer.UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -43,7 +42,8 @@ class UserApi(views.APIView):
     This endpoint can only be used
     if the user is authenticated
     """
-    authentication_classes = (authentication.CustomUserAuthentication, )
+
+    authentication_classes = (authentication.CustomUserAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request):
@@ -52,6 +52,7 @@ class UserApi(views.APIView):
         serializer = user_serializer.UserSerializer(user)
 
         return response.Response(serializer.data)
+
 
 class LogoutApi(views.APIView):
     authentication_classes = (authentication.CustomUserAuthentication,)
