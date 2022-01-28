@@ -4,6 +4,7 @@ from user import serializer as user_serializer
 
 from . import services
 
+
 class StatusSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     content = serializers.CharField()

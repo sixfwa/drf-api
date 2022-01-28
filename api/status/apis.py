@@ -45,6 +45,8 @@ class StatusRetrieveUpdateDelete(views.APIView):
         serializer = status_serializer.StatusSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         status = serializer.validated_data
-        serializer.instance = services.update_user_status(user=request.user, status_id=status_id, status_data=status)
+        serializer.instance = services.update_user_status(
+            user=request.user, status_id=status_id, status_data=status
+        )
 
         return response.Response(data=serializer.data)

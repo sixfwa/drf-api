@@ -26,14 +26,13 @@ class StatusDataClass:
             content=status_model.content,
             date_published=status_model.date_published,
             id=status_model.id,
-            user=status_model.user
+            user=status_model.user,
         )
 
 
 def create_status(user, status: "StatusDataClass") -> "StatusDataClass":
     status_create = status_models.Status.objects.create(
-        content=status.content,
-        user=user
+        content=status.content, user=user
     )
     return StatusDataClass.from_instance(status_model=status_create)
 
@@ -41,7 +40,9 @@ def create_status(user, status: "StatusDataClass") -> "StatusDataClass":
 def get_user_status(user: "User") -> list["StatusDataClass"]:
     user_status = status_models.Status.objects.filter(user=user)
 
-    return [StatusDataClass.from_instance(single_status) for single_status in user_status]
+    return [
+        StatusDataClass.from_instance(single_status) for single_status in user_status
+    ]
 
 
 def get_user_status_detail(status_id: int) -> "StatusDataClass":
